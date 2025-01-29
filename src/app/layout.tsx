@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import { Fraunces } from "next/font/google";
 import "./globals.css";
 
 const frauncesSans = Fraunces({
