@@ -4,8 +4,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  // Your AWS Lambda-like logic here
-  const data = { message: "Hello from Lambda-like function!" };
-
+  const data = { message: "Hello from serverside function" };
   res.status(200).json(data);
 }
