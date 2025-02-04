@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // experimental: {
+  //   serverActions: true, // If using server actions
+  // },
 };
 
 export default nextConfig;
