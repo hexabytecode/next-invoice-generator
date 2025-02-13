@@ -1,10 +1,5 @@
-import sgMail from "@sendgrid/mail";
-import dotenv from "dotenv";
-import { InvoiceType } from "@/types/invoiceTypes"; // Define this type
-
-dotenv.config();
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+import { sgMail } from "@/config/email";
+import { InvoiceType } from "../types/invoiceTypes";
 
 export async function sendInvoiceEmail(invoice: InvoiceType) {
   const msg = {

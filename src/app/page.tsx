@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { env } from "@/config/env";
 
 interface ApiResponse {
   message: string;
@@ -11,7 +12,7 @@ export default function Home() {
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_WEBSITE_URL}/api/ping`)
+    fetch(`${env.NEXT_PUBLIC_WEBSITE_URL}/api/ping`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

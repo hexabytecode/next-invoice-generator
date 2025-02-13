@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { createInvoice } from "@/services/invoiceService";
 import { sendInvoiceEmail } from "@/services/emailService";
 import { uploadInvoiceToS3 } from "@/services/storageService";
-import logger from "@/utils/logger";
+import logger from "@utils/logger";
 
 export async function POST(req: Request) {
   try {

@@ -1,10 +1,11 @@
-// src/utils/logger.ts
+// utils/logger.ts
 import winston from "winston";
+import { env } from "@/config/env";
 
 const { combine, timestamp, printf, colorize, align } = winston.format;
 
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
+  level: env.LOG_LEVEL || "info",
   format: combine(
     colorize({ all: true }),
     timestamp({

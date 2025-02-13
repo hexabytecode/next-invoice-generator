@@ -1,6 +1,6 @@
 // src/services/invoiceService.ts
 import Invoice from "../models/invoiceModel";
-import { InvoiceType } from "@/types/invoiceTypes";
+import { InvoiceType } from "../types/invoiceTypes";
 
 export async function createInvoice(data: InvoiceType) {
   const invoice = new Invoice(data);
