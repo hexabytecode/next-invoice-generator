@@ -1,4 +1,4 @@
-// src/services/invoiceService.ts
+// src/services/invoiceDbService.ts
 import Invoice from "../models/invoiceModel";
 import { InvoiceType } from "../types/invoiceTypes";
 
