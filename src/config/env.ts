@@ -9,6 +9,5 @@ export const env = {
   AWS_REGION: process.env.AWS_REGION || "us-east-1",
   AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME || "",
   LOG_LEVEL: process.env.NODE_ENV,
-  NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
   MONGO_URI: process.env.MONGO_URI || "",
 };

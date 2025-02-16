@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { env } from "@/config/env";
+import axios from "axios";
 
 interface ApiResponse {
   message: string;
@@ -11,14 +11,17 @@ interface ApiResponse {
 export default function Home() {
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
 
+  const fetchApiCall = async () => {
+    try {
+      const response = await axios.get<ApiResponse>(`api/ping`);
+      setApiData(response.data);
+    } catch (error) {
+      console.error("API Error: ", error);
+    }
+  };
+
   useEffect(() => {
-    fetch(`${env.NEXT_PUBLIC_WEBSITE_URL}/api/ping`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setApiData(data);
-      })
-      .catch((error) => console.log(error));
+    fetchApiCall();
   }, []);
 
   return (
