@@ -1,13 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
 import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
+import { getInvoiceTemplate } from "../src/services/storageService";
 
-export const generateInvoicePdfBuffer = (data: any): Buffer => {
-  const content = fs.readFileSync(
-    path.resolve(__dirname, "../assets/invoice_template.docx"),
-    "binary"
-  );
+export const generateInvoicePdfBuffer = async (data: any): Promise<Buffer> => {
+  const content = await getInvoiceTemplate();
 
   const zip = new PizZip(content);
   const doc = new Docxtemplater(zip, {
@@ -17,10 +13,8 @@ export const generateInvoicePdfBuffer = (data: any): Buffer => {
 
   doc.render(data);
 
-  const buf = doc.getZip().generate({
+  return doc.getZip().generate({
     type: "nodebuffer",
     compression: "DEFLATE",
   });
-
-  return buf;
 };

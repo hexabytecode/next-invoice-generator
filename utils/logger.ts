@@ -1,20 +1,24 @@
-// utils/logger.ts
 import winston from "winston";
 import { env } from "@/config/env";
 
 const { combine, timestamp, printf, colorize, align } = winston.format;
 
-const logger = winston.createLogger({
+export const logger = winston.createLogger({
   level: env.LOG_LEVEL || "info",
   format: combine(
-    colorize({ all: true }),
-    timestamp({
-      format: "YYYY-MM-DD hh:mm:ss.SSS A",
-    }),
+    timestamp({ format: "YYYY-MM-DD hh:mm:ss.SSS A" }),
     align(),
-    printf((info) => `[${info.timestamp}] ${info.level}: ${info.message}`)
+    printf(
+      ({ timestamp, level, message }) => `[${timestamp}] ${level}: ${message}`
+    )
   ),
-  transports: [new winston.transports.Console()],
+  transports: [
+    new winston.transports.Console({
+      format: combine(colorize({ all: true })),
+    }),
+    new winston.transports.File({
+      filename: "logs/app.log",
+      level: "error",
+    }),
+  ],
 });
-
-export default logger;
