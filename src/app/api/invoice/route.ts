@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const invoice = await createInvoice(body);
     const pdfBuffer = await generateInvoicePdfBuffer(invoice);
     const pdfUrl = await uploadInvoiceToS3(invoice, pdfBuffer);
-    await sendInvoiceEmail(invoice, pdfBuffer);
+    await sendInvoiceEmail(invoice, pdfUrl);
 
     return NextResponse.json({ success: true, invoice, pdfUrl });
   } catch (error) {

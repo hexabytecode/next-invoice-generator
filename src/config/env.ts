@@ -10,4 +10,6 @@ export const env = {
   SENDGRID_API_KEY: process.env.SENDGRID_API_KEY || "",
   LOG_LEVEL: process.env.NODE_ENV,
   MONGO_URI: process.env.MONGO_URI || "",
+  INVOICE_RECIPIENTS: process.env.INVOICE_RECIPIENTS,
+  INVOICE_SENDER: process.env.INVOICE_SENDER,
 };
