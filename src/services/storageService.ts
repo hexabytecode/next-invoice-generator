@@ -2,12 +2,13 @@ import { s3 } from "../config/storage";
 import { env } from "../config/env";
 import { InvoiceType } from "../types/invoiceTypes";
 
-async function uploadInvoiceToS3(invoice: InvoiceType, pdfBuffer: Buffer) {
+async function uploadInvoiceToS3(invoice: InvoiceType, docBuffer: Buffer) {
   const params = {
     Bucket: env.AWS_S3_BUCKET_NAME,
-    Key: `invoices/${invoice.invoice_no}.pdf`,
-    Body: pdfBuffer,
-    ContentType: "application/pdf",
+    Key: `invoices/${invoice.invoice_no}.docx`,
+    Body: docBuffer,
+    ContentType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
   };
 
   const result = await s3.upload(params).promise();
