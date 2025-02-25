@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces } from "next/font/google";
-import { connectDb } from "@/config/db";
 import "./globals.css";
-
-const frauncesSans = Fraunces({
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,12 +11,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  connectDb(); //testing db connection
   return (
     <html lang="en">
-      <body className={`${frauncesSans.className} antialiased`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
