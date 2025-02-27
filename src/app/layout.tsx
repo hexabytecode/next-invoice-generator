@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "VyaparBill helps businesses manage invoices, track expenses, and streamline their billing process with ease.",
   keywords: ["billing", "invoicing", "business management", "VyaparBill"],
   viewport: "width=device-width, initial-scale=1.0",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
