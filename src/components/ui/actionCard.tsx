@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ActionCardTypes } from "@/types/ui/actionCardTypes";
 import { FilePlus, FileText } from "lucide-react";
+import Link from "next/link";
 
 const icons = {
   FilePlus,
@@ -34,8 +35,8 @@ export function ActionCard({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <Button onClick={() => (window.location.href = `/${id}`)}>
-          {buttonText}
+        <Button>
+          <Link href={`/${id}`}>{buttonText}</Link>
         </Button>
       </CardContent>
     </Card>
