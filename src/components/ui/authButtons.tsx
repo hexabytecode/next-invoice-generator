@@ -7,7 +7,6 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ThemeToggle } from "./themeToggle";
 
 export function UnauthenticatedButtons() {
   return (
@@ -23,18 +22,13 @@ export function UnauthenticatedButtons() {
 }
 
 export function AuthenticatedButtons({ pathname }: { pathname: string }) {
-  return (
-    <div className="flex gap-2">
-      <ThemeToggle />
-      {pathname === "/" ? (
-        <Link href="/dashboard">
-          <Button variant="outline">Dashboard</Button>
-        </Link>
-      ) : (
-        <LogoutLink>
-          <Button variant="outline">Log out</Button>
-        </LogoutLink>
-      )}
-    </div>
+  return pathname === "/" ? (
+    <Link href="/dashboard">
+      <Button variant="outline">Dashboard</Button>
+    </Link>
+  ) : (
+    <LogoutLink>
+      <Button variant="outline">Log out</Button>
+    </LogoutLink>
   );
 }
