@@ -6,5 +6,7 @@ export default function middleware(req: NextApiRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!$|api/ping|api/public-route|_next/image).*)"], // Allow root and specific public APIs - like ping
+  matcher: [
+    "/((?!$|api/ping|api/public-route|_next/image|favicon.ico|logo.png|public/.*).*)",
+  ],
 };
