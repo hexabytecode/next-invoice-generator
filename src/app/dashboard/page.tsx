@@ -5,7 +5,7 @@ import { WelcomeBanner } from "@/components/ui/welcomeBanner";
 
 export default async function Dashboard() {
   return (
-    <div className=" bg-background text-foreground flex flex-col items-center justify-start">
+    <div className="bg-background text-foreground flex flex-col items-center justify-start">
       <main className="p-4 w-full max-w-4xl">
         <WelcomeBanner />
 
