@@ -9,12 +9,12 @@ const roles = await getRoles();
 
 export async function WelcomeBanner() {
   const roleName = roles?.[0]?.name || "No role assigned";
-  const roleId = roles?.[0]?.id || "default";
+  const roleKey = roles?.[0]?.key || "default";
 
   const roleVariant =
-    roleId === "paid-user"
+    roleKey === "paid-user"
       ? "success"
-      : roleName === "trial-user"
+      : roleKey === "trial-user"
       ? "warning"
       : "outline";
 
