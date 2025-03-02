@@ -11,7 +11,7 @@ export default async function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <ActionCard
-            id="create-invoice"
+            id="invoices/new"
             iconName="FilePlus"
             title="Create Invoice"
             description="Quickly create and send new invoices."
@@ -19,7 +19,7 @@ export default async function Dashboard() {
           />
 
           <ActionCard
-            id="view-invoices"
+            id="invoices"
             iconName="FileText"
             title="View Invoices"
             description="Manage and track all your invoices in one place."
