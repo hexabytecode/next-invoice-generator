@@ -1,36 +1,44 @@
-// import { useState, useEffect } from "react";
-// import { InvoiceTable } from "@/components/ui/invoiceTable";
-// import { FilterOptions } from "@/components/ui/filterOptions";
-// import { fetchInvoices } from "@/services/invoiceService";
-// import { Skeleton } from "@/components/ui/skeleton";
+"use client";
+
+import { useState, useEffect } from "react";
+import { InvoiceTable } from "@/components/ui/invoiceTable";
+import { FilterBar } from "@/components/filterBar";
+import { SkeletonTable } from "@/components/ui/skeletonTable";
+import { InvoiceType } from "@/types/invoiceTypes";
 
 export default function Invoices() {
-  // const [invoices, setInvoices] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [filter, setFilter] = useState("30");
+  const [invoices, setInvoices] = useState<InvoiceType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("7");
 
-  // useEffect(() => {
-  // Send API call on every filter
-  // const getInvoices = async () => {
-  //   setLoading(true);
-  //   const data = await fetchInvoices(filter);
-  //   setInvoices(data);
-  //   setLoading(false);
-  // };
-  // getInvoices();
-  // }, [filter]);
+  useEffect(() => {
+    const getInvoices = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `/api/invoice?filter=${encodeURIComponent(filter)}`
+        );
+        const data = await res.json();
+        setInvoices(data);
+      } catch (error) {
+        console.error("Failed to fetch invoices:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getInvoices();
+  }, [filter]);
 
   return (
     <div className="p-4">
-      {/* <FilterOptions filter={filter} setFilter={setFilter} />
+      <FilterBar filter={filter} setFilter={setFilter} />
       {loading ? (
-        <Skeleton count={5} />
+        <SkeletonTable count={5} />
       ) : invoices.length === 0 ? (
         <p>No invoices found for the selected period.</p>
       ) : (
         <InvoiceTable invoices={invoices} />
-      )} */}
-      This is the Invoice page
+      )}
     </div>
   );
 }

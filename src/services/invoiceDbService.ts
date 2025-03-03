@@ -1,5 +1,6 @@
 import Invoice from "../models/invoiceModel";
 import { InvoiceType } from "../types/invoiceTypes";
+import { InvoiceFilter } from "@/types/filterTypes";
 import { connectDb } from "@/config/db";
 import { logger } from "@utils/logger";
 
@@ -59,6 +60,20 @@ export async function deleteInvoice(id: string) {
     return deletedInvoice;
   } catch (error) {
     logger.error(`Error deleting invoice: ${error}`);
+    throw error;
+  }
+}
+
+export async function filterInvoices(filters: InvoiceFilter) {
+  await ensureDbConnection();
+  try {
+    const invoices = await Invoice.find(filters);
+    if (!invoices.length) {
+      logger.warn("No invoices found with the given filters");
+    }
+    return invoices;
+  } catch (error) {
+    logger.error(`Error filtering invoices: ${error}`);
     throw error;
   }
 }
