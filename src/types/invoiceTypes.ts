@@ -1,4 +1,5 @@
 export interface InvoiceType {
+  user_id: string;
   buyer_name: string;
   buyer_homeAddress: string;
   buyer_workAddress: string;

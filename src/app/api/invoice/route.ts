@@ -1,18 +1,30 @@
 import { NextResponse } from "next/server";
-import { createInvoice, filterInvoices } from "@/services/invoiceDbService";
+import { createInvoice } from "@/services/invoiceDbService";
 import { generateInvoiceDocBuffer } from "@utils/docxGenerator";
 import { uploadInvoiceToS3 } from "@/services/storageService";
 import { sendInvoiceEmail } from "@/services/emailService";
 import { logger } from "@utils/logger";
+import { fetchUserDetails } from "@/services/userService";
+
+/**
+ * REQUIREMENT
+ *
+ * 1. GET ALL INVOICES - FOR A SPECIFIC USER
+ * 2. GET ALL INVOICES BASED ON FILTERS (LIKE CREATED DATE OR INVOICE DATE) - FOR A SPECIFIC USER
+ * 3. EDIT 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID
+ * 4. DELETE 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID
+ */
 
 export async function GET() {
-  // const { searchParams } = new URL(req.url);
-  // const filter = searchParams.get("filter");
-
   try {
-    // const parsedFilter = filter ? JSON.parse(filter) : {};
-    const invoices = await filterInvoices({});
-    return NextResponse.json(invoices);
+    const { id } = await fetchUserDetails();
+    const user_id = id;
+    logger.info(`/invoice GET call made by user - ${user_id}`);
+
+    /**
+     * Pass this "user_id" while checking in the DB - this might require me pushing user_id in the db - which can cause an issue.
+     * Maybe I can excrypt this userID before pushing in DB if necessary
+     */
   } catch (error) {
     const err = error as Error;
     logger.error(err.message);
