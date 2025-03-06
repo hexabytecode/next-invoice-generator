@@ -5,6 +5,7 @@ import { uploadInvoiceToS3 } from "@/services/storageService";
 import { sendInvoiceEmail } from "@/services/emailService";
 import { logger } from "@utils/logger";
 import { fetchUserDetails } from "@/services/userService";
+import { hashUserId } from "@utils/hash";
 
 /**
  * REQUIREMENT
@@ -18,12 +19,12 @@ import { fetchUserDetails } from "@/services/userService";
 export async function GET() {
   try {
     const { id } = await fetchUserDetails();
-    const user_id = id;
-    logger.info(`/invoice GET call made by user - ${user_id}`);
-
+    const hashedUserId = hashUserId(id);
+    console.log("hashedUserId: ", hashedUserId);
     /**
      * Pass this "user_id" while checking in the DB - this might require me pushing user_id in the db - which can cause an issue.
      * Maybe I can excrypt this userID before pushing in DB if necessary
+     * Use this hashedUserId further ahead - add in DB
      */
   } catch (error) {
     const err = error as Error;

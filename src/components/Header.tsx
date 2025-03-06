@@ -6,8 +6,7 @@ import UserNav from "./UserNav";
 import Link from "next/link";
 
 export default function Header() {
-  const { isAuthenticated, getUser } = useKindeBrowserClient();
-  console.log(getUser());
+  const { isAuthenticated } = useKindeBrowserClient();
 
   return (
     <header className="flex justify-between items-center p-4 border-b">
