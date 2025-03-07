@@ -26,11 +26,14 @@ export async function createInvoice(data: InvoiceType) {
   }
 }
 
-export async function getInvoiceById(id: string) {
+export async function getInvoiceByFilter(user_id: string, filter: string) {
   await ensureDbConnection();
   try {
-    const invoice = await Invoice.findById(id);
-    if (!invoice) logger.warn(`Invoice not found: ${id}`);
+    console.log(filter);
+    // extract filters from the string
+    // find invoices based on filters as well
+    const invoice = await Invoice.find({ user_id: user_id });
+    // Add error handing => if (!invoice) logger.warn(`Invoice not found: ${id}`);
     return invoice;
   } catch (error) {
     logger.error(`Error fetching invoice: ${error}`);
@@ -38,10 +41,10 @@ export async function getInvoiceById(id: string) {
   }
 }
 
-export async function getAllInvoices() {
+export async function getAllInvoices(user_id: string) {
   await ensureDbConnection();
   try {
-    return await Invoice.find();
+    return await Invoice.find({ user_id: user_id });
   } catch (error) {
     logger.error(`Error fetching invoices: ${error}`);
     throw error;

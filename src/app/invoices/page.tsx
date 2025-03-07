@@ -16,7 +16,7 @@ export default function Invoices() {
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/invoice?filter=${encodeURIComponent(filter)}`
+          `/api/invoices?filter=${encodeURIComponent(filter)}`
         );
         const data = await res.json();
         setInvoices(data);
