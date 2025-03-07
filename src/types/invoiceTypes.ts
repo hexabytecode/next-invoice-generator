@@ -23,4 +23,12 @@ export interface InvoiceType {
   sgst_cost: number;
   total_cost: number;
   totalCost_toWords: string;
+  status: boolean;
+}
+
+export interface FilterQueryType {
+  user_id: string;
+  created_at?: { $gte: Date };
+  status?: string;
+  total_cost?: { $gte?: number; $lte?: number };
 }

@@ -15,15 +15,18 @@ import { InvoiceType } from "@/types/invoiceTypes";
 /**
  * REQUIREMENT
  *
- * 1. GET ALL INVOICES - FOR A SPECIFIC USER
- * 2. GET ALL INVOICES BASED ON FILTERS (LIKE CREATED DATE OR INVOICE DATE) - FOR A SPECIFIC USER
- * 3. EDIT 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID
- * 4. DELETE 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID
+ * 1. GET ALL INVOICES - FOR A SPECIFIC USER -> DONE
+ * 2. GET ALL INVOICES BASED ON FILTERS (LIKE CREATED DATE OR INVOICE DATE) - FOR A SPECIFIC USER -> DONE
+ * 3. EDIT 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID -> PENDING
+ * 4. DELETE 1 INVOICE - FOR A SPECIFIC USER WITH SPECIFIC INVOICE_ID -> PENDING
  */
 
 export async function GET(req: NextRequest) {
   try {
-    const filter = req.nextUrl?.searchParams.get("filters");
+    // Sample API with filter -> /invoice?duration=30&status=paid&amountMin=100&amountMax=500
+    const filters = Object.fromEntries(
+      req.nextUrl?.searchParams.entries() || []
+    );
 
     const { id } = await fetchUserDetails();
     if (!id)
@@ -35,8 +38,8 @@ export async function GET(req: NextRequest) {
 
     const hashedUserId = hashUserId(id);
 
-    const invoices = filter
-      ? await getInvoiceByFilter(hashedUserId, filter)
+    const invoices = Object.keys(filters).length
+      ? await getInvoiceByFilter(hashedUserId, filters)
       : await getAllInvoices(hashedUserId);
 
     return NextResponse.json({ success: true, invoices });

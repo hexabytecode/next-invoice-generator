@@ -1,5 +1,5 @@
 import Invoice from "../models/invoiceModel";
-import { InvoiceType } from "../types/invoiceTypes";
+import { InvoiceType, FilterQueryType } from "../types/invoiceTypes";
 import { InvoiceFilter } from "@/types/filterTypes";
 import { connectDb } from "@/config/db";
 import { logger } from "@utils/logger";
@@ -26,15 +26,54 @@ export async function createInvoice(data: InvoiceType) {
   }
 }
 
-export async function getInvoiceByFilter(user_id: string, filter: string) {
+export async function getInvoiceByFilter(
+  user_id: string,
+  filters: Record<string, string>
+) {
   await ensureDbConnection();
   try {
-    console.log(filter);
     // extract filters from the string
+    const filterQuery: FilterQueryType = { user_id };
+
+    // filters duration
+    if (filters.duration) {
+      const days = parseInt(filters.duration);
+      const fromDate = new Date();
+      fromDate.setDate(fromDate.getDate() - days);
+      filterQuery.created_at = { $gte: fromDate };
+    }
+
+    // filters status
+    if (filters.status) {
+      filterQuery.status = filters.status;
+    }
+
+    // filters amount
+    if (filters.amountMin) {
+      const minAmount = parseFloat(filters.amountMin);
+      filterQuery.total_cost = { $gte: minAmount };
+    }
+
+    // filters amountMax
+    if (filters.amountMax) {
+      filterQuery.total_cost = {
+        ...filterQuery.total_cost,
+        $lte: parseFloat(filters.amountMax),
+      };
+    }
+
     // find invoices based on filters as well
-    const invoice = await Invoice.find({ user_id: user_id });
-    // Add error handing => if (!invoice) logger.warn(`Invoice not found: ${id}`);
-    return invoice;
+    const invoices = await Invoice.find(filterQuery);
+
+    if (!invoices.length) {
+      logger.warn(
+        `No invoices found for user: ${user_id} with filters: ${JSON.stringify(
+          filters
+        )}`
+      );
+    }
+
+    return invoices;
   } catch (error) {
     logger.error(`Error fetching invoice: ${error}`);
     throw error;
@@ -44,7 +83,7 @@ export async function getInvoiceByFilter(user_id: string, filter: string) {
 export async function getAllInvoices(user_id: string) {
   await ensureDbConnection();
   try {
-    return await Invoice.find({ user_id: user_id });
+    return await Invoice.find({ user_id });
   } catch (error) {
     logger.error(`Error fetching invoices: ${error}`);
     throw error;
@@ -53,6 +92,7 @@ export async function getAllInvoices(user_id: string) {
 
 export async function deleteInvoice(id: string) {
   await ensureDbConnection();
+  // adding user_id check here is necessary
   try {
     const deletedInvoice = await Invoice.findByIdAndDelete(id);
     if (!deletedInvoice) {
@@ -69,6 +109,7 @@ export async function deleteInvoice(id: string) {
 
 export async function filterInvoices(filters: InvoiceFilter) {
   await ensureDbConnection();
+  // adding user_id check here is necessary
   try {
     const invoices = await Invoice.find(filters);
     if (!invoices.length) {
