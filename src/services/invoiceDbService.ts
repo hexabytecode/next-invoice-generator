@@ -1,6 +1,5 @@
 import Invoice from "../models/invoiceModel";
 import { InvoiceType, FilterQueryType } from "../types/invoiceTypes";
-import { InvoiceFilter } from "@/types/filterTypes";
 import { connectDb } from "@/config/db";
 import { logger } from "@utils/logger";
 
@@ -90,6 +89,33 @@ export async function getAllInvoices(user_id: string) {
   }
 }
 
+export async function updateInvoice(
+  user_id: string,
+  invoice_id: string,
+  updates: Partial<InvoiceType>
+) {
+  await ensureDbConnection();
+  try {
+    const updatedInvoice = await Invoice.findByIdAndUpdate(
+      {
+        id: user_id,
+        invoice_id,
+      },
+      updates,
+      { new: true } // return new obj after changes
+    );
+    if (!updatedInvoice) {
+      logger.warn(`Invoice not found for updation: ${invoice_id}`);
+      throw new Error("Invoice not found");
+    }
+    logger.info(`Invoice updates: ${invoice_id}`);
+    return updatedInvoice;
+  } catch (error) {
+    logger.error(`Error updating invoice: ${error}`);
+    throw error;
+  }
+}
+
 export async function deleteInvoice(id: string) {
   await ensureDbConnection();
   // adding user_id check here is necessary
@@ -103,21 +129,6 @@ export async function deleteInvoice(id: string) {
     return deletedInvoice;
   } catch (error) {
     logger.error(`Error deleting invoice: ${error}`);
-    throw error;
-  }
-}
-
-export async function filterInvoices(filters: InvoiceFilter) {
-  await ensureDbConnection();
-  // adding user_id check here is necessary
-  try {
-    const invoices = await Invoice.find(filters);
-    if (!invoices.length) {
-      logger.warn("No invoices found with the given filters");
-    }
-    return invoices;
-  } catch (error) {
-    logger.error(`Error filtering invoices: ${error}`);
     throw error;
   }
 }

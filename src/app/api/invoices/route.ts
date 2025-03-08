@@ -3,6 +3,7 @@ import {
   createInvoice,
   getAllInvoices,
   getInvoiceByFilter,
+  updateInvoice,
 } from "@/services/invoiceDbService";
 import { generateInvoiceDocBuffer } from "@utils/docxGenerator";
 import { uploadInvoiceToS3 } from "@/services/storageService";
@@ -50,6 +51,42 @@ export async function GET(req: NextRequest) {
       { success: false, message: err.message },
       { status: 500 }
     );
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = await req?.json();
+    const { invoice_no, ...updates } = body;
+
+    const { id } = await fetchUserDetails();
+    if (!id)
+      return NextResponse.json({
+        success: false,
+        message: "User not found",
+        status: 404,
+      });
+
+    const hashedUserId = hashUserId(id);
+    const updatedInvoice = await updateInvoice(
+      hashedUserId,
+      invoice_no,
+      updates
+    );
+
+    return NextResponse.json({
+      success: true,
+      message: "Invoice updated!",
+      updatedInvoice,
+    });
+  } catch (error) {
+    const err = error as Error;
+    logger.error(err.message);
+    return NextResponse.json({
+      success: false,
+      message: err.message,
+      status: 500,
+    });
   }
 }
 
