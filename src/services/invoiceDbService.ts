@@ -12,19 +12,6 @@ async function ensureDbConnection() {
   }
 }
 
-export async function createInvoice(data: InvoiceType) {
-  await ensureDbConnection();
-  try {
-    const invoice = new Invoice(data);
-    const savedInvoice = await invoice.save();
-    logger.info(`Invoice created: ${savedInvoice._id}`);
-    return savedInvoice;
-  } catch (error) {
-    logger.error(`Error creating invoice: ${error}`);
-    throw error;
-  }
-}
-
 export async function getInvoiceByFilter(
   user_id: string,
   filters: Record<string, string>
@@ -89,6 +76,19 @@ export async function getAllInvoices(user_id: string) {
   }
 }
 
+export async function createInvoice(data: InvoiceType) {
+  await ensureDbConnection();
+  try {
+    const invoice = new Invoice(data);
+    const savedInvoice = await invoice.save();
+    logger.info(`Invoice created: ${savedInvoice._id}`);
+    return savedInvoice;
+  } catch (error) {
+    logger.error(`Error creating invoice: ${error}`);
+    throw error;
+  }
+}
+
 export async function updateInvoice(
   user_id: string,
   invoice_id: string,
@@ -116,16 +116,20 @@ export async function updateInvoice(
   }
 }
 
-export async function deleteInvoice(id: string) {
+export async function deleteInvoice(user_id: string, invoice_id: string) {
   await ensureDbConnection();
-  // adding user_id check here is necessary
   try {
-    const deletedInvoice = await Invoice.findByIdAndDelete(id);
+    const deletedInvoice = await Invoice.findByIdAndDelete({
+      id: user_id,
+      invoice_id,
+    });
+
     if (!deletedInvoice) {
-      logger.warn(`Invoice not found for deletion: ${id}`);
+      logger.warn(`Invoice not found for deletion: ${invoice_id}`);
       throw new Error("Invoice not found");
     }
-    logger.info(`Invoice deleted: ${id}`);
+
+    logger.info(`Invoice deleted: ${invoice_id}`);
     return deletedInvoice;
   } catch (error) {
     logger.error(`Error deleting invoice: ${error}`);
