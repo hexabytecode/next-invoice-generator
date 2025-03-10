@@ -13,6 +13,7 @@ const ItemSchema = new mongoose.Schema({
 
 const InvoiceSchema = new mongoose.Schema(
   {
+    user_id: { type: String, required: true, unique: true },
     buyer_name: { type: String, required: true },
     buyer_homeAddress: { type: String, required: true },
     buyer_workAddress: { type: String, required: true },
