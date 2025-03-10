@@ -18,8 +18,8 @@ export default function Invoices() {
         const res = await fetch(
           `/api/invoices?filter=${encodeURIComponent(filter)}`
         );
-        const data = await res.json();
-        setInvoices(data);
+        const { invoices } = await res.json();
+        setInvoices(invoices);
       } catch (error) {
         console.error("Failed to fetch invoices:", error);
       } finally {
@@ -30,12 +30,10 @@ export default function Invoices() {
   }, [filter]);
 
   return (
-    <div className="p-4">
+    <div className="my-4 p-4 flex flex-col justify-center">
       <FilterBar filter={filter} setFilter={setFilter} />
       {loading ? (
         <SkeletonTable count={5} />
-      ) : invoices.length === 0 ? (
-        <p>No invoices found for the selected period.</p>
       ) : (
         <InvoiceTable invoices={invoices} />
       )}
