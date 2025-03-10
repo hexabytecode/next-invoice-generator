@@ -13,7 +13,7 @@ const ItemSchema = new mongoose.Schema({
 
 const InvoiceSchema = new mongoose.Schema(
   {
-    user_id: { type: String, required: true, unique: true },
+    user_id: { type: String, required: true },
     buyer_name: { type: String, required: true },
     buyer_homeAddress: { type: String, required: true },
     buyer_workAddress: { type: String, required: true },
@@ -21,7 +21,7 @@ const InvoiceSchema = new mongoose.Schema(
     buyer_contact: { type: Number, required: true },
     transport_name: { type: String, required: true },
     transport_gst: { type: String, required: true },
-    invoice_no: { type: String, required: true, unique: true },
+    invoice_no: { type: String, required: true },
     invoice_date: { type: String, required: true },
     items: { type: [ItemSchema], required: true },
     subtotal_cost: { type: Number, required: true },
@@ -32,6 +32,8 @@ const InvoiceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+InvoiceSchema.index({ user_id: 1, invoice_no: 1 }, { unique: true });
 
 const Invoice =
   mongoose.models.Invoice ||
