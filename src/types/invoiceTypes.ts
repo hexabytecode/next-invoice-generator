@@ -26,6 +26,12 @@ export interface InvoiceType {
   status: boolean;
 }
 
+export interface InvoiceStore {
+  invoice: Partial<InvoiceType>;
+  setInvoice: (invoice: Partial<InvoiceType>) => void;
+  clearInvoice: () => void;
+}
+
 export interface FilterQueryType {
   user_id: string;
   created_at?: { $gte: Date };
