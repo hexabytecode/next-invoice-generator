@@ -30,7 +30,6 @@ export const ItemDetailsSchema = z.object({
   items: z
     .array(
       z.object({
-        item_no: z.number().positive(),
         item_name: z.string().min(1),
         item_hsn: z.number().positive(),
         item_qty: z.number().positive(),

@@ -23,7 +23,6 @@ export const ItemDetails = () => {
     defaultValues: {
       items: [
         {
-          item_no: 1,
           item_name: "Item 1",
           item_hsn: 1234,
           item_qty: 1,
@@ -43,9 +42,9 @@ export const ItemDetails = () => {
   });
 
   const handleNext = (values: z.infer<typeof formSchema>) => {
-    setInvoice(values);
     console.log("form values: ", values);
     console.log("invoice values: ", invoice);
+    setInvoice(values);
   };
 
   return (
@@ -53,20 +52,15 @@ export const ItemDetails = () => {
       <form onSubmit={form.handleSubmit(handleNext)}>
         {fields.map((item, index) => (
           <div key={item.id}>
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_no`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item No</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item No" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item No</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormItem>
+              <FormLabel>Item No</FormLabel>
+              <FormControl>
+                <Input disabled value={index + 1} />
+              </FormControl>
+              <FormDescription>Enter Item No</FormDescription>
+              <FormMessage />
+            </FormItem>
+
             <FormField
               control={form.control}
               name={`items.${index}.item_name`}
@@ -81,6 +75,7 @@ export const ItemDetails = () => {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name={`items.${index}.item_hsn`}
@@ -156,9 +151,11 @@ export const ItemDetails = () => {
               )}
             />
 
-            <Button type="button" onClick={() => remove(index)}>
-              Remove
-            </Button>
+            {fields.length > 1 && (
+              <Button type="button" onClick={() => remove(index)}>
+                Remove
+              </Button>
+            )}
           </div>
         ))}
 
@@ -166,7 +163,6 @@ export const ItemDetails = () => {
           type="button"
           onClick={() =>
             append({
-              item_no: fields.length + 1,
               item_name: "Item " + (fields.length + 1),
               item_hsn: 1234,
               item_qty: 1,
@@ -178,7 +174,6 @@ export const ItemDetails = () => {
         >
           Add Item
         </Button>
-        <Button type="submit">Next</Button>
         <Button type="submit">Next</Button>
       </form>
     </Form>

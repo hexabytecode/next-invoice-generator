@@ -10,7 +10,6 @@ export interface InvoiceType {
   invoice_no: string;
   invoice_date: string;
   items: {
-    item_no: number;
     item_name: string;
     item_hsn: number;
     item_qty: number;
