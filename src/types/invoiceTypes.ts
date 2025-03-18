@@ -8,7 +8,7 @@ export interface InvoiceType {
   transport_name: string;
   transport_gst: string;
   invoice_no: string;
-  invoice_date: string;
+  invoice_date: Date;
   items: {
     item_name: string;
     item_hsn: number;

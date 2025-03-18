@@ -43,7 +43,7 @@ export const ItemDetailsSchema = z.object({
 
 export const InvoiceConfirmationSchema = z.object({
   invoice_no: z.string().min(1, "Invoice number is required"),
-  invoice_date: z.string().date(),
+  invoice_date: z.date(),
   subtotal_cost: z.number().positive(),
   cgst_cost: z.number().nonnegative(),
   sgst_cost: z.number().nonnegative(),
