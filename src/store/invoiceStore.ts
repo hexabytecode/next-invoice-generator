@@ -9,5 +9,8 @@ export const useStore = create<InvoiceStore>((set) => ({
     set((state) => ({ invoice: { ...state.invoice, ...invoice } }));
     localStorage.setItem("invoiceFormData", JSON.stringify(invoice));
   },
-  clearInvoice: () => set({ invoice: {} }),
+  clearInvoice: () => {
+    set({ invoice: {} });
+    localStorage.removeItem("invoiceFormData");
+  },
 }));
