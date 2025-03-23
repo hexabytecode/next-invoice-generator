@@ -31,6 +31,8 @@ export interface InvoiceStore {
   invoice: Partial<InvoiceType>;
   setInvoice: (invoice: Partial<InvoiceType>) => void;
   clearInvoice: () => void;
+  isNextDisabled: boolean;
+  isBackDisabled: boolean;
 }
 
 export interface FilterQueryType {

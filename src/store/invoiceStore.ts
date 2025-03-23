@@ -5,8 +5,11 @@ import { persist } from "zustand/middleware";
 export const useStore = create<InvoiceStore>()(
   persist(
     (set) => ({
-      step: 0,
-      setStep: (step) => set({ step }),
+      step: 1,
+      isNextDisabled: false,
+      isBackDisabled: true,
+      setStep: (step) =>
+        set({ step, isNextDisabled: step == 4, isBackDisabled: step == 1 }),
       invoice: {},
       setInvoice: (invoice) => {
         set((state) => ({ invoice: { ...state.invoice, ...invoice } }));

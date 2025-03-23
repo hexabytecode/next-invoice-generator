@@ -1,7 +1,6 @@
 import { CustomerDetailsSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useStore } from "@/store/invoiceStore";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +13,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { InvoiceType } from "@/types/invoiceTypes";
+import { useStore } from "@/store/invoiceStore";
 
-export const CustomerDetails = () => {
+export const CustomerDetails = ({
+  handleNext,
+  handleBack,
+}: {
+  handleNext: <T extends Partial<InvoiceType>>(data: T) => void;
+  handleBack: () => void;
+}) => {
   const formSchema = CustomerDetailsSchema;
+
+  const { isNextDisabled, isBackDisabled } = useStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,17 +38,13 @@ export const CustomerDetails = () => {
     },
   });
 
-  const { invoice, setInvoice } = useStore();
-
-  const handleNext = (values: z.infer<typeof formSchema>) => {
-    setInvoice(values);
-    console.log("form values: ", values);
-    console.log("invoice values: ", invoice);
-  };
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleNext)}>
+      <form
+        onSubmit={form.handleSubmit((data) =>
+          handleNext<z.infer<typeof formSchema>>(data)
+        )}
+      >
         <FormField
           control={form.control}
           name="buyer_name"
@@ -115,7 +120,12 @@ export const CustomerDetails = () => {
           )}
         />
 
-        <Button type="submit">Next</Button>
+        <Button disabled={isNextDisabled} type="submit">
+          Next
+        </Button>
+        <Button disabled={isBackDisabled} type="button" onClick={handleBack}>
+          Back
+        </Button>
       </form>
     </Form>
   );
