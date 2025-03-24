@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
-import { useStore } from "@/store/invoiceStore";
+import { FormChildProps } from "@/types/ui/formTypes";
 
-export const ItemDetails = () => {
+export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
   const formSchema = ItemDetailsSchema;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -34,18 +34,10 @@ export const ItemDetails = () => {
     },
   });
 
-  const { invoice, setInvoice } = useStore();
-
   const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: "items",
   });
-
-  const handleNext = (values: z.infer<typeof formSchema>) => {
-    console.log("form values: ", values);
-    console.log("invoice values: ", invoice);
-    setInvoice(values);
-  };
 
   return (
     <Form {...form}>
@@ -174,7 +166,13 @@ export const ItemDetails = () => {
         >
           Add Item
         </Button>
-        <Button type="submit">Next</Button>
+
+        <div>
+          <Button type="submit">Next</Button>
+          <Button type="button" onClick={handleBack}>
+            Back
+          </Button>
+        </div>
       </form>
     </Form>
   );
