@@ -10,12 +10,8 @@ export const CustomerDetailsSchema = z.object({
     .min(15, "GST number must be 15 characters")
     .refine((value) => Validator.gst(value), "Invalid GST number"),
   buyer_contact: z
-    .number()
-    .positive("Contact number must be positive")
-    .refine(
-      (value) => Validator.mobile(value.toString()),
-      "Invalid contact number"
-    ),
+    .string()
+    .refine((value) => Validator.mobile(value), "Invalid contact number"),
 });
 
 export const TransportDetailsSchema = z.object({

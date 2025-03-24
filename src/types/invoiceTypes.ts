@@ -4,7 +4,7 @@ export interface InvoiceType {
   buyer_homeAddress: string;
   buyer_workAddress: string;
   buyer_gst: string;
-  buyer_contact: number;
+  buyer_contact: string;
   transport_name: string;
   transport_gst: string;
   invoice_no: string;

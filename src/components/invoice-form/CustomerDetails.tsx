@@ -34,7 +34,7 @@ export const CustomerDetails = ({
       buyer_homeAddress: "",
       buyer_workAddress: "",
       buyer_gst: "",
-      buyer_contact: 0,
+      buyer_contact: "",
     },
   });
 
