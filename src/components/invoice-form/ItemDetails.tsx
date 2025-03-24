@@ -151,7 +151,7 @@ export const ItemDetails = () => {
               )}
             />
 
-            {fields.length > 1 && (
+            {fields.length > 1 && index == fields.length - 1 && (
               <Button type="button" onClick={() => remove(index)}>
                 Remove
               </Button>
