@@ -2,7 +2,6 @@ import { TransportDetailsSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useStore } from "@/store/invoiceStore";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,8 +13,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { FormChildProps } from "@/types/ui/formTypes";
 
-export const TransportDetails = () => {
+export const TransportDetails = ({
+  handleNext,
+  handleBack,
+}: FormChildProps) => {
   const formSchema = TransportDetailsSchema;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -25,14 +28,6 @@ export const TransportDetails = () => {
       transport_gst: "",
     },
   });
-
-  const { invoice, setInvoice } = useStore();
-
-  const handleNext = (values: z.infer<typeof formSchema>) => {
-    setInvoice(values);
-    console.log("form values: ", values);
-    console.log("invoice values: ", invoice);
-  };
 
   return (
     <Form {...form}>
@@ -66,8 +61,12 @@ export const TransportDetails = () => {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Next</Button>
+        <div>
+          <Button type="submit">Next</Button>
+          <Button type="button" onClick={handleBack}>
+            Back
+          </Button>
+        </div>
       </form>
     </Form>
   );
