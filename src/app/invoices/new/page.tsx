@@ -25,7 +25,12 @@ export default function InvoiceFormController() {
    */
   function handleNext<T extends Partial<InvoiceType>>(data: T): void {
     setInvoice(data);
-    if (step < steps.length - 1) setStep(step + 1);
+    /**
+     * step ranges from [1, length of the steps array]
+     * We're setting the StepComponent based off the step value.
+     * The confusion happened because step is a 1-based index and the array is 0-based.
+     */
+    if (step < steps.length) setStep(step + 1);
     else if (step == steps.length - 1) {
       /**
        * This is where I handle the submittion of the multi page form.

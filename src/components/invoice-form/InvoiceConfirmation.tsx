@@ -2,7 +2,6 @@ import { InvoiceConfirmationSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useStore } from "@/store/invoiceStore";
 import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,8 +23,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
+import { FormChildProps } from "@/types/ui/formTypes";
 
-export const InvoiceConfirmation = () => {
+export const InvoiceConfirmation = ({
+  handleNext,
+  handleBack,
+}: FormChildProps) => {
   const formSchema = InvoiceConfirmationSchema;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,17 +45,9 @@ export const InvoiceConfirmation = () => {
     },
   });
 
-  const { invoice, setInvoice } = useStore();
-
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    setInvoice(values);
-    console.log("form values: ", values);
-    console.log("invoice values: ", invoice);
-  };
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form onSubmit={form.handleSubmit(handleNext)}>
         <FormField
           control={form.control}
           name="invoice_no"
@@ -201,8 +196,12 @@ export const InvoiceConfirmation = () => {
             </FormItem>
           )}
         />
-
-        <Button type="submit">Submit</Button>
+        <div>
+          <Button type="submit">Submit</Button>
+          <Button type="button" onClick={handleBack}>
+            Back
+          </Button>
+        </div>
       </form>
     </Form>
   );
