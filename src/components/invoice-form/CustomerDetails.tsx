@@ -13,16 +13,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { InvoiceType } from "@/types/invoiceTypes";
+import { FormChildProps } from "@/types/ui/formTypes";
 import { useStore } from "@/store/invoiceStore";
 
-export const CustomerDetails = ({
-  handleNext,
-  handleBack,
-}: {
-  handleNext: <T extends Partial<InvoiceType>>(data: T) => void;
-  handleBack: () => void;
-}) => {
+export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
   const formSchema = CustomerDetailsSchema;
 
   const { isNextDisabled, isBackDisabled } = useStore();
