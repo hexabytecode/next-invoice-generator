@@ -18,31 +18,27 @@ export default function InvoiceFormController() {
   const { step, setStep, setInvoice } = useStore();
   const StepComponent = steps?.[step - 1]?.component;
 
-  console.log("Step:", step);
-  console.log("Store state:", { step });
-  console.log(StepComponent);
-
   /**
-   *
-   * @param data
    * While invoking this function, I'll be using type assertion & pass the type (used as "T" here) as an argument.
    * This will help me to pass the type of the data that I'm going to pass to the function.
-   *
    * handleNext<TypeToBePassed>(data);
    */
   function handleNext<T extends Partial<InvoiceType>>(data: T): void {
     setInvoice(data);
-
-    if (step < steps.length - 1) {
-      setStep(step + 1);
+    if (step < steps.length - 1) setStep(step + 1);
+    else if (step == steps.length - 1) {
+      /**
+       * This is where I handle the submittion of the multi page form.
+       * We can show some Animation, push the user to a different page or do something else.
+       * Consoling the data for now
+       */
+      console.log("Invoice Data: ", data);
     }
   }
 
-  const handleBack = () => {
-    if (step > 0) {
-      setStep(step - 1);
-    }
-  };
+  function handleBack() {
+    if (step > 0) setStep(step - 1);
+  }
 
   return (
     <div className="space-y-6">
