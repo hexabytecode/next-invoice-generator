@@ -125,7 +125,13 @@ export const InvoiceConfirmation = ({
             <FormItem>
               <FormLabel>Tax - CGST</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Tax - CGST" {...field} />
+                <Input
+                  {...field}
+                  onChange={({ target }) =>
+                    field.onChange(Number(target.value) || 0)
+                  }
+                  placeholder="Enter Tax - CGST"
+                />
               </FormControl>
               <FormDescription>Enter Tax - CGST</FormDescription>
               <FormMessage />
@@ -140,7 +146,13 @@ export const InvoiceConfirmation = ({
             <FormItem>
               <FormLabel>Tax - SGST</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Tax - SGST" {...field} />
+                <Input
+                  {...field}
+                  onChange={({ target }) =>
+                    field.onChange(Number(target.value) || 0)
+                  }
+                  placeholder="Enter Tax - SGST"
+                />
               </FormControl>
               <FormDescription>Enter Tax - SGST</FormDescription>
               <FormMessage />
@@ -155,7 +167,13 @@ export const InvoiceConfirmation = ({
             <FormItem>
               <FormLabel>Total Amount</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Total Amount" {...field} />
+                <Input
+                  {...field}
+                  onChange={({ target }) =>
+                    field.onChange(Number(target.value) || 0)
+                  }
+                  placeholder="Enter Total Amount"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
