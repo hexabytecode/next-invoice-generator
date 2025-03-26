@@ -1,18 +1,9 @@
 "use client";
 
 import { useStore } from "@/store/invoiceStore";
-import { CustomerDetails } from "@/components/invoice-form/CustomerDetails";
-import { ItemDetails } from "@/components/invoice-form/ItemDetails";
-import { TransportDetails } from "@/components/invoice-form/TransportDetails";
-import { InvoiceConfirmation } from "@/components/invoice-form/InvoiceConfirmation";
 import { InvoiceType } from "@/types/invoiceTypes";
-
-const steps = [
-  { id: 1, component: CustomerDetails },
-  { id: 2, component: ItemDetails },
-  { id: 3, component: TransportDetails },
-  { id: 4, component: InvoiceConfirmation },
-];
+import { StepProgress } from "@/components/ui/stepProgress";
+import { steps } from "@/constants/steps";
 
 export default function InvoiceFormController() {
   const { step, setStep, setInvoice } = useStore();
@@ -46,12 +37,18 @@ export default function InvoiceFormController() {
   }
 
   return (
-    <div className="space-y-6">
-      {StepComponent ? (
-        <StepComponent handleNext={handleNext} handleBack={handleBack} />
-      ) : (
-        <span>Something went wrong!</span>
-      )}
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+      <div className="w-full max-w-2xl bg-white p-6 shadow-lg rounded-2xl">
+        {/* Step Progress Bar */}
+        <StepProgress />
+
+        {/* Form Component */}
+        {StepComponent ? (
+          <StepComponent handleNext={handleNext} handleBack={handleBack} />
+        ) : (
+          <span className="text-red-500">Something went wrong!</span>
+        )}
+      </div>
     </div>
   );
 }
