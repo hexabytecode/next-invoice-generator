@@ -9,7 +9,7 @@ export const useStore = create<InvoiceStore>()(
       isNextDisabled: false,
       isBackDisabled: true,
       setStep: (step) =>
-        set({ step, isNextDisabled: step == 4, isBackDisabled: step == 1 }),
+        set({ step, isNextDisabled: step == 5, isBackDisabled: step == 1 }),
       invoice: {},
       setInvoice: (invoice) => {
         set((state) => ({ invoice: { ...state.invoice, ...invoice } }));

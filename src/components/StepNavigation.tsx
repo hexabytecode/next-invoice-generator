@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 import { useStore } from "@/store/invoiceStore";
-import { steps } from "@/constants/steps";
+import { stepsLength } from "@/constants/steps";
 
 interface StepNavigationButtonsProps {
   handleBack?: () => void;
@@ -17,7 +17,7 @@ export const StepNavigationButtons = ({
         Back
       </Button>
       <Button disabled={isNextDisabled} type="submit">
-        {steps.length == step ? "Submit" : "Next"}
+        {stepsLength == step ? "Submit" : "Next"}
       </Button>
     </div>
   );

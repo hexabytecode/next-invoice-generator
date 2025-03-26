@@ -9,3 +9,5 @@ export const steps = [
   { id: 3, component: TransportDetails },
   { id: 4, component: InvoiceConfirmation },
 ];
+
+export const stepsLength = steps.length;

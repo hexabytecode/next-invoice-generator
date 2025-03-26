@@ -3,7 +3,7 @@
 import { useStore } from "@/store/invoiceStore";
 import { InvoiceType } from "@/types/invoiceTypes";
 import { StepProgress } from "@/components/ui/stepProgress";
-import { steps } from "@/constants/steps";
+import { steps, stepsLength } from "@/constants/steps";
 
 export default function InvoiceFormController() {
   const { step, setStep, setInvoice } = useStore();
@@ -21,8 +21,8 @@ export default function InvoiceFormController() {
      * We're setting the StepComponent based off the step value.
      * The confusion happened because step is a 1-based index and the array is 0-based.
      */
-    if (step < steps.length) setStep(step + 1);
-    else if (step == steps.length - 1) {
+    if (step < stepsLength) setStep(step + 1);
+    else if (step == stepsLength) {
       /**
        * This is where I handle the submittion of the multi page form.
        * We can show some Animation, push the user to a different page or do something else.
