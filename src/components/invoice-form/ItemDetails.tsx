@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormChildProps } from "@/types/ui/formTypes";
+import { StepNavigationButtons } from "../StepNavigation";
 
 export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
   const formSchema = ItemDetailsSchema;
@@ -167,12 +168,7 @@ export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
           Add Item
         </Button>
 
-        <div>
-          <Button type="submit">Next</Button>
-          <Button type="button" onClick={handleBack}>
-            Back
-          </Button>
-        </div>
+        <StepNavigationButtons handleBack={handleBack} />
       </form>
     </Form>
   );

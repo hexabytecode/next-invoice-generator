@@ -2,7 +2,6 @@ import { TransportDetailsSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
+import { StepNavigationButtons } from "../StepNavigation";
 
 export const TransportDetails = ({
   handleNext,
@@ -61,12 +61,7 @@ export const TransportDetails = ({
             </FormItem>
           )}
         />
-        <div>
-          <Button type="submit">Next</Button>
-          <Button type="button" onClick={handleBack}>
-            Back
-          </Button>
-        </div>
+        <StepNavigationButtons handleBack={handleBack} />
       </form>
     </Form>
   );

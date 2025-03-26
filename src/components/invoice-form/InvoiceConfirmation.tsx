@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { FormChildProps } from "@/types/ui/formTypes";
+import { StepNavigationButtons } from "../StepNavigation";
 
 export const InvoiceConfirmation = ({
   handleNext,
@@ -110,7 +111,13 @@ export const InvoiceConfirmation = ({
             <FormItem>
               <FormLabel>Subtotal Cost</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Subtotal Cost" {...field} />
+                <Input
+                  {...field}
+                  onChange={({ target }) =>
+                    field.onChange(Number(target.value) || 0)
+                  }
+                  placeholder="Enter Subtotal Cost"
+                />
               </FormControl>
               <FormDescription>Enter Subtotal Cost</FormDescription>
               <FormMessage />
@@ -214,12 +221,8 @@ export const InvoiceConfirmation = ({
             </FormItem>
           )}
         />
-        <div>
-          <Button type="submit">Submit</Button>
-          <Button type="button" onClick={handleBack}>
-            Back
-          </Button>
-        </div>
+
+        <StepNavigationButtons handleBack={handleBack} />
       </form>
     </Form>
   );

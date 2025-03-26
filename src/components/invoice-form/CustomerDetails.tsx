@@ -2,7 +2,7 @@ import { CustomerDetailsSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { StepNavigationButtons } from "../StepNavigation";
 import {
   Form,
   FormControl,
@@ -14,13 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
-import { useStore } from "@/store/invoiceStore";
 
 export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
   const formSchema = CustomerDetailsSchema;
-
-  const { isNextDisabled, isBackDisabled } = useStore();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -114,12 +110,7 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
           )}
         />
 
-        <Button disabled={isNextDisabled} type="submit">
-          Next
-        </Button>
-        <Button disabled={isBackDisabled} type="button" onClick={handleBack}>
-          Back
-        </Button>
+        <StepNavigationButtons handleBack={handleBack} />
       </form>
     </Form>
   );
