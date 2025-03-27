@@ -12,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Textarea } from "../ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
 
@@ -40,7 +41,7 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
           name="buyer_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Buyer Name</FormLabel>
               <FormControl>
                 <Input placeholder="Enter Buyer Name" {...field} />
               </FormControl>
@@ -57,7 +58,7 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
             <FormItem>
               <FormLabel>Buyer Home Address</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Buyer Home Address" {...field} />
+                <Textarea placeholder="Enter Buyer Home Address" {...field} />
               </FormControl>
               <FormDescription>Enter Buyer Home Address</FormDescription>
               <FormMessage />
@@ -72,7 +73,7 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
             <FormItem>
               <FormLabel>Buyer Work Address</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Buyer Work Address" {...field} />
+                <Textarea placeholder="Enter Buyer Work Address" {...field} />
               </FormControl>
               <FormDescription>Enter Buyer Work Address</FormDescription>
               <FormMessage />
@@ -80,35 +81,37 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="buyer_gst"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Buyer GST</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter Buyer GST" {...field} />
-              </FormControl>
-              <FormDescription>Enter Buyer GST</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-4">
+          <FormField
+            control={form.control}
+            name="buyer_gst"
+            render={({ field }) => (
+              <FormItem className="w-1/2">
+                <FormLabel>Buyer GST</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter Buyer GST" {...field} />
+                </FormControl>
+                <FormDescription>Enter Buyer GST</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="buyer_contact"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Contact</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter Buyer Contact" {...field} />
-              </FormControl>
-              <FormDescription>Enter Buyer Contact</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="buyer_contact"
+            render={({ field }) => (
+              <FormItem className="w-1/2">
+                <FormLabel>Contact</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter Buyer Contact" {...field} />
+                </FormControl>
+                <FormDescription>Enter Buyer Contact</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <StepNavigationButtons handleBack={handleBack} />
       </form>
