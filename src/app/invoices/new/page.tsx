@@ -4,6 +4,7 @@ import { useStore } from "@/store/invoiceStore";
 import { InvoiceType } from "@/types/invoiceTypes";
 import { StepProgress } from "@/components/ui/stepProgress";
 import { steps, stepsLength } from "@/constants/steps";
+import { StepHeader } from "@/components/invoice-form/StepHeader";
 
 export default function InvoiceFormController() {
   const { step, setStep, setInvoice } = useStore();
@@ -41,7 +42,8 @@ export default function InvoiceFormController() {
       <div className="w-full max-w-2xl bg-white p-6 shadow-lg rounded-2xl">
         {/* Step Progress Bar */}
         <StepProgress />
-
+        {/* Stepper header */}
+        <StepHeader />
         {/* Form Component */}
         {StepComponent ? (
           <StepComponent handleNext={handleNext} handleBack={handleBack} />

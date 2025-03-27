@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useStore } from "@/store/invoiceStore";
 import { stepsLength } from "@/constants/steps";
 

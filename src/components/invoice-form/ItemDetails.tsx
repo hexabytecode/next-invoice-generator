@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormChildProps } from "@/types/ui/formTypes";
-import { StepNavigationButtons } from "../StepNavigation";
+import { StepNavigationButtons } from "./StepNavigation";
 
 export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
   const formSchema = ItemDetailsSchema;

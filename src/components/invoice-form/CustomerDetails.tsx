@@ -2,7 +2,7 @@ import { CustomerDetailsSchema } from "@/schema/invoiceSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { StepNavigationButtons } from "../StepNavigation";
+import { StepNavigationButtons } from "./StepNavigation";
 import {
   Form,
   FormControl,

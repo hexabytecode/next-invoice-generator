@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { FormChildProps } from "@/types/ui/formTypes";
-import { StepNavigationButtons } from "../StepNavigation";
+import { StepNavigationButtons } from "./StepNavigation";
 
 export const InvoiceConfirmation = ({
   handleNext,

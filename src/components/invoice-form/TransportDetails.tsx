@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
-import { StepNavigationButtons } from "../StepNavigation";
+import { StepNavigationButtons } from "./StepNavigation";
 
 export const TransportDetails = ({
   handleNext,
