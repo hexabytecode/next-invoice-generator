@@ -5,8 +5,8 @@ import { WelcomeBanner } from "@/components/ui/welcomeBanner";
 
 export default async function Dashboard() {
   return (
-    <div className="bg-background text-foreground flex flex-col items-center justify-start">
-      <main className="p-4 w-full max-w-4xl">
+    <div className="bg-background text-foreground flex flex-1 flex-col items-center">
+      <main className="p-4 w-full max-w-4xl flex-1 flex flex-col">
         <WelcomeBanner />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

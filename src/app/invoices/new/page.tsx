@@ -38,7 +38,7 @@ export default function InvoiceFormController() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+    <div className="flex flex-1 items-center justify-center p-4 bg-gray-100">
       <div className="w-full max-w-2xl bg-white p-6 shadow-lg rounded-2xl">
         {/* Step Progress Bar */}
         <StepProgress />
