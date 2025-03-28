@@ -81,7 +81,7 @@ export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
           )}
         />
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-between">
           <FormField
             control={form.control}
             name="buyer_gst"

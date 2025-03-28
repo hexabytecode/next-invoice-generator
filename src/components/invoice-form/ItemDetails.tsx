@@ -45,89 +45,90 @@ export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
       <form onSubmit={form.handleSubmit(handleNext)}>
         {fields.map((item, index) => (
           <div key={item.id}>
-            <FormItem>
-              <FormLabel>Item No</FormLabel>
-              <FormControl>
-                <Input disabled value={index + 1} />
-              </FormControl>
-              <FormDescription>Enter Item No</FormDescription>
-              <FormMessage />
-            </FormItem>
+            <div className="flex gap-4 justify-between">
+              <FormItem>
+                <FormLabel>Item No</FormLabel>
+                <FormControl>
+                  <Input disabled value={index + 1} />
+                </FormControl>
+                <FormDescription>Enter Item No</FormDescription>
+                <FormMessage />
+              </FormItem>
 
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_name`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item Name" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item Name</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name={`items.${index}.item_name`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Item Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Item Name" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter Item Name</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`items.${index}.item_hsn`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Item HSN</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Item HSN" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter Item HSN</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_hsn`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item HSN</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item HSN" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item HSN</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_qty`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item Quantity</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item Quantity" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item Quantity</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_unitWeight`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item Unit Weight</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item Unit Weight" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item Unit Weight</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name={`items.${index}.item_unitRate`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Item Unit Rate</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Item Unit Rate" {...field} />
-                  </FormControl>
-                  <FormDescription>Enter Item Unit Rate</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex gap-4 justify-between">
+              <FormField
+                control={form.control}
+                name={`items.${index}.item_qty`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Item Quantity</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Item Quantity" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter Item Quantity</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`items.${index}.item_unitWeight`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Item Unit Weight</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Item Unit Weight" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter Item Unit Weight</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`items.${index}.item_unitRate`}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Item Unit Rate</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter Item Unit Rate" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter Item Unit Rate</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}
