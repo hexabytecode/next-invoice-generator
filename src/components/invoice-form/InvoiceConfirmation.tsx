@@ -49,60 +49,62 @@ export const InvoiceConfirmation = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleNext)}>
-        <FormField
-          control={form.control}
-          name="invoice_no"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Invoice Number</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter Invoice Number" {...field} />
-              </FormControl>
-              <FormDescription>Enter Invoice Number</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="flex gap-4 justify-between">
+          <FormField
+            control={form.control}
+            name="invoice_no"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Invoice Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter Invoice Number" {...field} />
+                </FormControl>
+                <FormDescription>Enter Invoice Number</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="invoice_date"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Invoice Date</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={clsx(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Invoice date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>Select Invoice Date</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="invoice_date"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Invoice Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={clsx(
+                          "w-[240px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Invoice date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormDescription>Select Invoice Date</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
@@ -124,48 +126,49 @@ export const InvoiceConfirmation = ({
             </FormItem>
           )}
         />
+        <div className="flex gap-4 justify-between">
+          <FormField
+            control={form.control}
+            name="cgst_cost"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tax - CGST</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    onChange={({ target }) =>
+                      field.onChange(Number(target.value) || 0)
+                    }
+                    placeholder="Enter Tax - CGST"
+                  />
+                </FormControl>
+                <FormDescription>Enter Tax - CGST</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="cgst_cost"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tax - CGST</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  onChange={({ target }) =>
-                    field.onChange(Number(target.value) || 0)
-                  }
-                  placeholder="Enter Tax - CGST"
-                />
-              </FormControl>
-              <FormDescription>Enter Tax - CGST</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="sgst_cost"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tax - SGST</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  onChange={({ target }) =>
-                    field.onChange(Number(target.value) || 0)
-                  }
-                  placeholder="Enter Tax - SGST"
-                />
-              </FormControl>
-              <FormDescription>Enter Tax - SGST</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="sgst_cost"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tax - SGST</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    onChange={({ target }) =>
+                      field.onChange(Number(target.value) || 0)
+                    }
+                    placeholder="Enter Tax - SGST"
+                  />
+                </FormControl>
+                <FormDescription>Enter Tax - SGST</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
