@@ -1,15 +1,22 @@
 import { InvoiceStore } from "@/types/invoiceTypes";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { steps } from "@/constants/steps";
 
 export const useStore = create<InvoiceStore>()(
   persist(
     (set) => ({
       step: 1,
+      maxStep: 1,
       isNextDisabled: false,
       isBackDisabled: true,
       setStep: (step) =>
-        set({ step, isNextDisabled: step == 5, isBackDisabled: step == 1 }),
+        set((state) => ({
+          step,
+          maxStep: Math.max(step, state.maxStep),
+          isNextDisabled: step == steps.length,
+          isBackDisabled: step == 1,
+        })),
       invoice: {},
       setInvoice: (invoice) => {
         set((state) => ({ invoice: { ...state.invoice, ...invoice } }));

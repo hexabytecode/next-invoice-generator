@@ -27,6 +27,7 @@ export interface InvoiceType {
 
 export interface InvoiceStore {
   step: number;
+  maxStep: number;
   setStep: (step: number) => void;
   invoice: Partial<InvoiceType>;
   setInvoice: (invoice: Partial<InvoiceType>) => void;
