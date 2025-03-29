@@ -14,18 +14,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
 import { StepNavigationButtons } from "./StepNavigation";
+import { useStore } from "@/store/invoiceStore";
 
 export const TransportDetails = ({
   handleNext,
   handleBack,
 }: FormChildProps) => {
+  const { invoice } = useStore();
   const formSchema = TransportDetailsSchema;
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      transport_name: "",
-      transport_gst: "",
+      transport_name: invoice.transport_name || "",
+      transport_gst: invoice.transport_gst || "",
     },
   });
 

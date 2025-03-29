@@ -7,7 +7,7 @@ import { steps, stepsLength } from "@/constants/steps";
 import { StepHeader } from "@/components/invoice-form/StepHeader";
 
 export default function InvoiceFormController() {
-  const { step, setStep, setInvoice } = useStore();
+  const { invoice, step, setStep, setInvoice } = useStore();
   const StepComponent = steps?.[step - 1]?.component;
 
   /**
@@ -29,7 +29,7 @@ export default function InvoiceFormController() {
        * We can show some Animation, push the user to a different page or do something else.
        * Consoling the data for now
        */
-      console.log("Invoice Data: ", data);
+      console.log("Invoice Data: ", invoice);
     }
   }
 

@@ -14,7 +14,7 @@ export const useStore = create<InvoiceStore>()(
         set((state) => ({
           step,
           maxStep: Math.max(step, state.maxStep),
-          isNextDisabled: step == steps.length,
+          isNextDisabled: step == steps.length + 1,
           isBackDisabled: step == 1,
         })),
       invoice: {},

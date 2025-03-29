@@ -15,23 +15,26 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormChildProps } from "@/types/ui/formTypes";
 import { StepNavigationButtons } from "./StepNavigation";
+import { useStore } from "@/store/invoiceStore";
 
 export const ItemDetails = ({ handleNext, handleBack }: FormChildProps) => {
+  const { invoice } = useStore();
   const formSchema = ItemDetailsSchema;
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      items: [
-        {
-          item_name: "Item 1",
-          item_hsn: 1234,
-          item_qty: 1,
-          item_unitWeight: 1,
-          item_unitRate: 1,
-          item_cost: 1,
-        },
-      ],
+      items: invoice.items?.length
+        ? invoice.items
+        : [
+            {
+              item_name: "Item 1",
+              item_hsn: 1234,
+              item_qty: 1,
+              item_unitWeight: 1,
+              item_unitRate: 1,
+              item_cost: 1,
+            },
+          ],
     },
   });
 

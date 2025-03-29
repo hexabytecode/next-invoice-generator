@@ -15,17 +15,19 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Input } from "@/components/ui/input";
 import { FormChildProps } from "@/types/ui/formTypes";
+import { useStore } from "@/store/invoiceStore";
 
 export const CustomerDetails = ({ handleNext, handleBack }: FormChildProps) => {
+  const { invoice } = useStore();
   const formSchema = CustomerDetailsSchema;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      buyer_name: "",
-      buyer_homeAddress: "",
-      buyer_workAddress: "",
-      buyer_gst: "",
-      buyer_contact: "",
+      buyer_name: invoice.buyer_name || "",
+      buyer_homeAddress: invoice.buyer_homeAddress || "",
+      buyer_workAddress: invoice.buyer_workAddress || "",
+      buyer_gst: invoice.buyer_gst || "",
+      buyer_contact: invoice.buyer_contact || "",
     },
   });
 

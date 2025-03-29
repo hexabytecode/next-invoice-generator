@@ -25,24 +25,25 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { FormChildProps } from "@/types/ui/formTypes";
 import { StepNavigationButtons } from "./StepNavigation";
+import { useStore } from "@/store/invoiceStore";
 
 export const InvoiceConfirmation = ({
   handleNext,
   handleBack,
 }: FormChildProps) => {
+  const { invoice } = useStore();
   const formSchema = InvoiceConfirmationSchema;
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       invoice_no: "",
-      invoice_date: new Date(),
-      subtotal_cost: 0,
-      cgst_cost: 0,
-      sgst_cost: 0,
-      total_cost: 0,
-      totalCost_toWords: "",
-      status: false,
+      invoice_date: invoice.invoice_date || new Date(),
+      subtotal_cost: invoice.subtotal_cost || 0,
+      cgst_cost: invoice.cgst_cost || 0,
+      sgst_cost: invoice.sgst_cost || 0,
+      total_cost: invoice.total_cost || 0,
+      totalCost_toWords: invoice.totalCost_toWords || "",
+      status: invoice.status || false,
     },
   });
 
