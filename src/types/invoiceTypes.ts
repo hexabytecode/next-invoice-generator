@@ -9,14 +9,7 @@ export interface InvoiceType {
   transport_gst: string;
   invoice_no: string;
   invoice_date: Date;
-  items: {
-    item_name: string;
-    item_hsn: number;
-    item_qty: number;
-    item_unitWeight: number;
-    item_unitRate: number;
-    item_cost: number;
-  }[];
+  items: ItemsType[];
   subtotal_cost: number;
   cgst_cost: number;
   sgst_cost: number;
@@ -24,7 +17,14 @@ export interface InvoiceType {
   totalCost_toWords: string;
   status: boolean;
 }
-
+export interface ItemsType {
+  item_name: string;
+  item_hsn: number;
+  item_qty: number;
+  item_unitWeight: number;
+  item_unitRate: number;
+  item_cost: number;
+}
 export interface InvoiceStore {
   step: number;
   maxStep: number;

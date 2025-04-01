@@ -13,6 +13,7 @@ import { logger } from "@utils/logger";
 import { fetchUserDetails } from "@/services/userService";
 import { hashUserId } from "@utils/hash";
 import { InvoiceType } from "@/types/invoiceTypes";
+import { serializeItems } from "@utils/serialize";
 
 export async function GET(req: NextRequest) {
   try {
@@ -58,7 +59,12 @@ export async function POST(req: Request) {
       });
 
     const hashedUserId = hashUserId(id);
-    const data: InvoiceType = { ...body, user_id: hashedUserId };
+    const serializedItems = serializeItems(body.items);
+    const data: InvoiceType = {
+      ...body,
+      user_id: hashedUserId,
+      items: serializedItems,
+    };
 
     const invoice = await createInvoice(data);
     const docBuffer = await generateInvoiceDocBuffer(invoice);

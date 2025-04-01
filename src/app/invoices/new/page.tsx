@@ -5,6 +5,7 @@ import { InvoiceType } from "@/types/invoiceTypes";
 import { StepProgress } from "@/components/ui/stepProgress";
 import { steps, stepsLength } from "@/constants/steps";
 import { StepHeader } from "@/components/invoice-form/StepHeader";
+import { createInvoice } from "@/services/apiService";
 
 export default function InvoiceFormController() {
   const { invoice, step, setStep, setInvoice } = useStore();
@@ -30,6 +31,7 @@ export default function InvoiceFormController() {
        * Consoling the data for now
        */
       console.log("Invoice Data: ", invoice);
+      createInvoice(invoice);
     }
   }
 
