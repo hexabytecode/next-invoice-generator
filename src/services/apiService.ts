@@ -11,3 +11,15 @@ export async function createInvoice(invoiceData: Partial<InvoiceType>) {
     console.error("Error creating invoice:", error);
   }
 }
+
+export async function fetchInvoices(filter: string) {
+  try {
+    const { data } = await axios.get(
+      `/api/invoices?filter=${encodeURIComponent(filter)}`
+    );
+    const { invoices } = data;
+    return invoices;
+  } catch (error) {
+    console.error("Failed to fetch invoices:", error);
+  }
+}
